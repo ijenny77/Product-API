@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Products</title>
+</head>
+<style>
+    h1{
+        text-align: center;
+    }
+    .product-box{
+        border: 1px solid black;
+        width: 25%;
+        margin: 5rem auto;
+        padding: 2rem;
+    }
+</style>
+
+<body>
+<h1>Product Manager</h1>
+<div class="product-box">
+    <h2>Products</h2>
+
+    <ul id="products"></ul>
+
+    <h3>Add Product</h3>
+
+    <input id="name" placeholder="Name">
+    <input id="price" placeholder="Price">
+    <button onclick="addProduct()">Add</button>
+</div>
+
+<script>
+
+const API = "http://localhost:3000/products"
+const list = document.getElementById("products")
+
+// Load products
+function loadProducts(){
+  fetch(API)
+  .then(res => res.json())
+  .then(products => {
+    list.innerHTML = products.map(p => `
+      <li>
+        ${p.name} - ${p.price}
+        <button onclick="deleteProduct(${p.id})">Delete</button>
+        <button onclick="editProduct(${p.id},'${p.name}','${p.price}')">Edit</button>
+      </li>
+    `).join("")
+  })
+}
+
+// Add product
+function addProduct(){
+  const name = document.getElementById("name").value
+  const price = document.getElementById("price").value
+
+  fetch(API,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({name,price})
+  }).then(loadProducts)
+}
+
+// Delete product
+function deleteProduct(id){
+  fetch(API+"/"+id,{method:"DELETE"})
+  .then(loadProducts)
+}
+
+// Edit product
+function editProduct(id,name,price){
+  const newName = prompt("New name:",name)
+  const newPrice = prompt("New price:",price)
+
+  fetch(API+"/"+id,{
+    method:"PUT",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({name:newName,price:newPrice})
+  }).then(loadProducts)
+}
+
+loadProducts()
+
+</script>
+
+</body>
+</html>
