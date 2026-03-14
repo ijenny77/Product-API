@@ -1,0 +1,29 @@
+body{
+        background-color: rgb(212, 211, 211);
+    }
+    h1{
+        text-align: center;
+        margin-top: 7rem;
+    }
+    .product-box{
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 20%;
+        margin: 2rem auto;
+        padding: 1.4rem;
+        background-color: rgb(168, 168, 170);
+    }
+    li{
+        margin-bottom: 0.5rem;
+    }
+    #add{
+        background-color: black;
+        border-radius: 5px;
+        color: white;
+        margin-top: 0.5rem;
+        width:30%;
+    }
+    input{
+        border-radius: 3px;
+        background-color: rgb(201, 199, 199);
+    }
