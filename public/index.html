@@ -4,14 +4,34 @@
 <title>Products</title>
 </head>
 <style>
+    body{
+        background-color: rgb(212, 211, 211);
+    }
     h1{
         text-align: center;
+        margin-top: 7rem;
     }
     .product-box{
         border: 1px solid black;
-        width: 25%;
-        margin: 5rem auto;
-        padding: 2rem;
+        border-radius: 5px;
+        width: 20%;
+        margin: 2rem auto;
+        padding: 1.4rem;
+        background-color: rgb(168, 168, 170);
+    }
+    li{
+        margin-bottom: 0.5rem;
+    }
+    #add{
+        background-color: black;
+        border-radius: 5px;
+        color: white;
+        margin-top: 0.5rem;
+        width:30%;
+    }
+    input{
+        border-radius: 3px;
+        background-color: rgb(201, 199, 199);
     }
 </style>
 
@@ -26,7 +46,7 @@
 
     <input id="name" placeholder="Name">
     <input id="price" placeholder="Price">
-    <button onclick="addProduct()">Add</button>
+    <button id="add" onclick="addProduct()">Add</button>
 </div>
 
 <script>
@@ -42,8 +62,8 @@ function loadProducts(){
     list.innerHTML = products.map(p => `
       <li>
         ${p.name} - ${p.price}
-        <button onclick="deleteProduct(${p.id})">Delete</button>
-        <button onclick="editProduct(${p.id},'${p.name}','${p.price}')">Edit</button>
+        <button style="border:1px solid blue;border-radius:3px; background-color:blue;color:white" onclick="editProduct(${p.id},'${p.name}','${p.price}')">Edit</button>
+        <button style="border:1px solid red; border-radius:3px; background-color:red;color:white" onclick="deleteProduct(${p.id})">Delete</button>
       </li>
     `).join("")
   })
